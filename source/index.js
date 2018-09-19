@@ -4,5 +4,8 @@
  * @version 0.1.0
  */
 
-export { default } from './ReactLoadableSSRAddon';
-export { default as getBundles } from './getBundles';
+import ReactLoadableSSRAddon from './ReactLoadableSSRAddon';
+import getBundles from './getBundles';
+
+module.exports = ReactLoadableSSRAddon;
+exports.getBundles = getBundles;
