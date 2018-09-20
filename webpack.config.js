@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const ReactLoadableSSRAddon = require('./lib').default;
+const ReactLoadableSSRAddon = require('./lib');
 
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || '8080';
