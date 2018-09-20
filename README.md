@@ -335,6 +335,10 @@ containing an `array of objects` with the following format:
 <br />
 
 ## Release History
+* 0.1.2
+    * FIX: [Issue #2](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/2) reported by [@tatchi](https://github.com/tatchi)
+* 0.1.1
+    * FIX: [Issue #1](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/1) reported by [@tatchi](https://github.com/tatchi)
 * 0.1.0
     * First release
     * NEW: Created `getBundles()` to retrieve required assets
