@@ -3,6 +3,7 @@
   "version": "0.1.2",
   "description": "Server Side Render add-on for React Loadable. Load splitted chunks was never that easy.",
   "main": "lib/index.js",
+  "source": "source/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/themgoncalves/react-loadable-ssr-addon.git"
@@ -24,7 +25,7 @@
   "scripts": {
     "prepare": "npm run build",
     "start": "npm run build && webpack && babel-node example/server.js",
-    "build": "rm -rf lib && babel source -d lib",
+    "build": "rm -rf lib && microbundle --external crypto",
     "lint": "eslint --ext js --ext jsx source || exit 0",
     "lint:fix": "eslint --ext js --ext jsx source --fix|| exit 0",
     "stats": "NODE_ENV=development webpack --profile --json > compilation-stats.json"
@@ -57,6 +58,7 @@
     "eslint-plugin-react": "^7.11.0",
     "express": "^4.16.3",
     "husky": "^0.14.3",
+    "microbundle": "^0.6.0",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
     "react-loadable": "^5.5.0",
