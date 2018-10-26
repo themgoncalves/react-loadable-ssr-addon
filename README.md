@@ -335,6 +335,8 @@ containing an `array of objects` with the following format:
 <br />
 
 ## Release History
+* 0.1.3
+    * FIX: [Issue #4](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/4) reported by [@tomkelsey](https://github.com/tomkelsey)
 * 0.1.2
     * FIX: [Issue #2](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/2) reported by [@tatchi](https://github.com/tatchi)
 * 0.1.1
