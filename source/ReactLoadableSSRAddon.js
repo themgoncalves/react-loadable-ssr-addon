@@ -52,13 +52,13 @@ export default class ReactLoadableSSRAddon {
         id, files, siblings = [], hash,
       } = chunk;
 
-      const key = this.getChunkOrigin(chunk)
-        || chunk.names[0]
-        || id;
+      const keys = this.getChunkOrigin(chunk);
 
-      this.assetsByName.set(key, {
-        id, files, hash, siblings,
-      });
+      for (let j = 0; j < keys.length; j += 1) {
+        this.assetsByName.set(keys[j], {
+          id, files, hash, siblings,
+        });
+      }
     }
 
     return this.assetsByName;
@@ -93,21 +93,27 @@ export default class ReactLoadableSSRAddon {
   /**
    * Get application chunk origin
    * @method getChunkOrigin
+   * @param {object} id  - Webpack application chunk id
+   * @param {object} names  - Webpack application chunk names
    * @param {object} modules  - Webpack application chunk modules
-   * @returns {string} Chunk Key
+   * @returns {array} Chunk Keys
    */
   /* eslint-disable class-methods-use-this */
-  getChunkOrigin({ modules }) {
+  getChunkOrigin({ id, names, modules }) {
+    const origins = new Set();
     for (let i = 0; i < modules.length; i += 1) {
       const { reasons } = modules[i];
       for (let j = 0; j < reasons.length; j += 1) {
         const { type, userRequest } = reasons[j];
         if (type === 'import()') {
-          return userRequest;
+          origins.add(userRequest);
         }
       }
     }
-    return null;
+
+    if (origins.size === 0) { return [names[0] || id]; }
+
+    return Array.from(origins);
   }
   /* eslint-enabled */
 
