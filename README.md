@@ -13,7 +13,7 @@
 `React Loadable SSR Add-on` is a `server side render` add-on for [React Loadable](https://github.com/jamiebuilds/react-loadable)
 that helps you to load dynamically all files dependencies, e.g. `splitted chunks`, `css`, etc.
 
-Oh yeah, and we also **provide support for [SRI (Subresource Integrity)](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity)**. 
+Oh yeah, and we also **provide support for [SRI (Subresource Integrity)](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity)**.
 
 <br />
 
@@ -335,6 +335,8 @@ containing an `array of objects` with the following format:
 <br />
 
 ## Release History
+* 0.1.4
+    * FIX: [Issue #5](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/5) reported by [@tomkelsey](https://github.com/tomkelsey)
 * 0.1.3
     * FIX: [Issue #4](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/4) reported by [@tomkelsey](https://github.com/tomkelsey)
 * 0.1.2
