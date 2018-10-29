@@ -5,6 +5,6 @@ import App from './components/App';
 
 window.onload = () => {
   Loadable.preloadReady().then(() => {
-    ReactDOM.hydrate(<App/>, document.getElementById('app'));
+    ReactDOM.hydrate(<App />, document.getElementById('app'));
   });
 };

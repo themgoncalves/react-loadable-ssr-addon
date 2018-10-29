@@ -12,11 +12,17 @@ const ContentExample = Loadable({
   loading: Loading,
 });
 
+const MultilevelExample = Loadable({
+  loader: () => import(/* webpackChunkName: "multilevel" */'./multilevel/Multilevel'),
+  loading: Loading,
+});
+
 export default function App() {
   return (
     <React.Fragment>
       <HeaderExample />
       <ContentExample />
+      <MultilevelExample />
     </React.Fragment>
   )
 }

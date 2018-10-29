@@ -19,6 +19,8 @@ server.get('*', (req, res) => {
     </Loadable.Capture>
   );
 
+  console.log('Modules to be loaded: ', modules);
+
   let bundles = getBundles(manifest, [...manifest.entrypoints, ...Array.from(modules)]);
 
   const styles = bundles.css || [];
