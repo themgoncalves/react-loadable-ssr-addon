@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const ReactLoadableSSRAddon = require('./lib').default;
+const ReactLoadableSSRAddon = require('./lib');
 
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || '8080';
@@ -8,7 +8,7 @@ const PORT = process.env.PORT || '8080';
 module.exports = {
   target: 'web',
   entry: {
-    index: './example/client.jsx'
+    index: './example/client.jsx',
   },
   devtool: 'cheap-module-eval-source-map',
   output: {
@@ -34,7 +34,7 @@ module.exports = {
             babelrc: false,
             presets: [
               '@babel/preset-env',
-              '@babel/preset-react'
+              '@babel/preset-react',
             ],
             plugins: [
               require('@babel/plugin-proposal-class-properties'),

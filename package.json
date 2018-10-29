@@ -23,8 +23,9 @@
   },
   "scripts": {
     "prepare": "npm run build",
-    "start": "npm run build && webpack && babel-node example/server.js",
+    "start": "npm run clean:example && npm run build && webpack && babel-node example/server.js",
     "build": "rm -rf lib && babel source -d lib",
+    "clean:example": "rm -rf ./example/dist/",
     "lint": "eslint --ext js --ext jsx source || exit 0",
     "lint:fix": "eslint --ext js --ext jsx source --fix|| exit 0",
     "stats": "NODE_ENV=development webpack --profile --json > compilation-stats.json"
