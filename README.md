@@ -89,6 +89,11 @@ const html = ReactDOMServer.renderToString(
 // now we concatenate the loaded `modules` from react-loadable `Loadable.Capture` method
 // with our application entry point
 const modulesToBeLoaded = [...manifest.entrypoints, ...Array.from(modules)];
+// also if you find your project still fetching the files after the placement
+// maybe a good idea to switch the order from the implementation above to
+// const modulesToBeLoaded = [...Array.from(modules), ...manifest.entrypoints];
+// see the issue #6 regarding this thread
+// https://github.com/themgoncalves/react-loadable-ssr-addon/issues/6
 
 // after that, we pass the required modules to `getBundles` map it.
 // `getBundles` will return all the required assets, group by `file type`.
@@ -179,7 +184,7 @@ import { getBundles } from 'react-loadable-ssr-addon';
  * @param {array} chunks - Chunks list to be loaded
  * @returns {array} - Assets list group by file type
  */
-let bundles = getBundles(manifest, modules);
+const bundles = getBundles(manifest, modules);
 
 
 const styles = bundles.css || [];
@@ -335,6 +340,8 @@ containing an `array of objects` with the following format:
 <br />
 
 ## Release History
+* 0.1.5
+    * FIX: [Issue #7](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/7) reported by [@themgoncalves](https://github.com/themgoncalves) and [@tomkelsey](https://github.com/tomkelsey)
 * 0.1.4
     * FIX: [Issue #5](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/5) reported by [@tomkelsey](https://github.com/tomkelsey)
 * 0.1.3

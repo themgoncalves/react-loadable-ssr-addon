@@ -1,7 +1,7 @@
 /**
  * react-loadable-ssr-addon
  * @author Marcos Gonçalves <contact@themgoncalves.com>
- * @version 0.1.4
+ * @version 0.1.5
  */
 
 import unique from './utils/unique';
