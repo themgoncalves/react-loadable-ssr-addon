@@ -3,7 +3,7 @@ import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import Loadable from 'react-loadable';
-import { getBundles } from 'react-loadable-ssr-addon'
+import { getBundles } from 'react-loadable-ssr-addon';
 import App from './components/App';
 
 const manifest = require('./dist/react-loadable-ssr-addon.json');
@@ -19,9 +19,7 @@ server.get('*', (req, res) => {
     </Loadable.Capture>
   );
 
-  console.log('Modules to be loaded: ', modules);
-
-  let bundles = getBundles(manifest, [...manifest.entrypoints, ...Array.from(modules)]);
+  const bundles = getBundles(manifest, [...manifest.entrypoints, ...Array.from(modules)]);
 
   const styles = bundles.css || [];
   const scripts = bundles.js || [];

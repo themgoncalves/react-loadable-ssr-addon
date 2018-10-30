@@ -7,7 +7,7 @@
 import fs from 'fs';
 import path from 'path';
 import url from 'url';
-import { getFileExtension, computeIntegrity } from './utils';
+import { getFileExtension, computeIntegrity, isDuplicated } from './utils';
 
 // Webpack plugin name
 const PLUGIN_NAME = 'ReactLoadableSSRAddon';
@@ -216,21 +216,23 @@ export default class ReactLoadableSSRAddon {
         if (!assets[id]) { assets[id] = {}; }
         if (!assets[id][ext]) { assets[id][ext] = []; }
 
-        if (currentAsset
-          && this.options.integrity
-          && !currentAsset[this.options.integrityPropertyName]) {
-          currentAsset[this.options.integrityPropertyName] = computeIntegrity(
-            this.options.integrityAlgorithms,
-            currentAsset.source(),
-          );
-        }
+        if (!isDuplicated(assets[id][ext], 'file', file)) {
+          if (currentAsset
+            && this.options.integrity
+            && !currentAsset[this.options.integrityPropertyName]) {
+            currentAsset[this.options.integrityPropertyName] = computeIntegrity(
+              this.options.integrityAlgorithms,
+              currentAsset.source(),
+            );
+          }
 
-        assets[id][ext].push({
-          file,
-          hash,
-          publicPath: url.resolve(this.options.publicPath || '', file),
-          integrity: currentAsset[this.options.integrityPropertyName],
-        });
+          assets[id][ext].push({
+            file,
+            hash,
+            publicPath: url.resolve(this.options.publicPath || '', file),
+            integrity: currentAsset[this.options.integrityPropertyName],
+          });
+        }
       }
     });
 

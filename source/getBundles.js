@@ -4,6 +4,8 @@
  * @version 0.1.4
  */
 
+import unique from './utils/unique';
+
 /**
  * getBundles
  * @param {object} manifest - The assets manifest content generate by ReactLoadableSSRAddon
@@ -14,7 +16,7 @@
 function getBundles(manifest, chunks) {
   const assetsKey = chunks.reduce((key, chunk) => {
     if (manifest.origins[chunk]) {
-      key = [...key, ...manifest.origins[chunk]];
+      key = unique([...key, ...manifest.origins[chunk]]);
     }
     return key;
   }, []);
@@ -23,7 +25,7 @@ function getBundles(manifest, chunks) {
     Object.keys(manifest.assets[asset]).forEach((key) => {
       const content = manifest.assets[asset][key];
       if (!bundle[key]) { bundle[key] = []; }
-      bundle[key] = [...bundle[key], ...content];
+      bundle[key] = unique([...bundle[key], ...content]);
     });
     return bundle;
   }, {});
