@@ -340,6 +340,8 @@ containing an `array of objects` with the following format:
 <br />
 
 ## Release History
+* 0.1.6
+    * FIX: `getManifestOutputPath` method when requested from `Webpack Dev Middleware`;
 * 0.1.5
     * FIX: [Issue #7](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/7) reported by [@themgoncalves](https://github.com/themgoncalves) and [@tomkelsey](https://github.com/tomkelsey)
 * 0.1.4

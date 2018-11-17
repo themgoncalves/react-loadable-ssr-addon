@@ -1,7 +1,7 @@
 /**
  * react-loadable-ssr-addon
  * @author Marcos Gonçalves <contact@themgoncalves.com>
- * @version 0.1.5
+ * @version 0.1.6
  */
 
 import fs from 'fs';
@@ -85,7 +85,7 @@ export default class ReactLoadableSSRAddon {
    * @method isRequestFromDevServer
    * @returns {boolean} - True or False
    */
-  isRequestFromDevServer() {
+  get isRequestFromDevServer() {
     if (process.argv.some(arg => arg.includes('webpack-dev-server'))) { return true; }
     return this.compiler.outputFileSystem && this.compiler.outputFileSystem.constructor.name === 'MemoryFileSystem';
   }
@@ -128,7 +128,7 @@ export default class ReactLoadableSSRAddon {
       return this.options.filename;
     }
 
-    if (this.isRequestFromDevServer()) {
+    if (this.isRequestFromDevServer && this.compiler.options.devServer) {
       let outputPath = (this.compiler.options.devServer.outputPath || this.compiler.outputPath || '/');
 
       if (outputPath === '/') {

@@ -1,6 +1,6 @@
 {
   "name": "react-loadable-ssr-addon",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Server Side Render add-on for React Loadable. Load splitted chunks was never that easy.",
   "main": "lib/index.js",
   "repository": {
