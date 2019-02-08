@@ -24,6 +24,12 @@
 
 <!--- Provide a general summary of the issue in the Title above -->
 
+### Environment
+
+1. OS running: <!--- macOS mojave/Windows 10/Linux Ubunto...  -->
+2. Node version:
+3. Webpack version:
+
 ## Detailed Description
 <!--- Provide a detailed description of the change or addition you are proposing -->
 
