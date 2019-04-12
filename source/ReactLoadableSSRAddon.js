@@ -226,12 +226,14 @@ export default class ReactLoadableSSRAddon {
             );
           }
 
-          assets[id][ext].push({
-            file,
-            hash,
-            publicPath: url.resolve(this.options.publicPath || '', file),
-            integrity: currentAsset[this.options.integrityPropertyName],
-          });
+          if (currentAsset) {
+            assets[id][ext].push({
+              file,
+              hash,
+              publicPath: url.resolve(this.options.publicPath || '', file),
+              integrity: currentAsset[this.options.integrityPropertyName],
+            });
+          }
         }
       }
     });
