@@ -210,7 +210,7 @@ export default class ReactLoadableSSRAddon {
 
       for (let i = 0; i < files.length; i += 1) {
         const file = files[i];
-        const currentAsset = originAssets[file];
+        const currentAsset = originAssets[file] || {};
         const ext = getFileExtension(file).replace(/^\.+/, '').toLowerCase();
 
         if (!assets[id]) { assets[id] = {}; }
