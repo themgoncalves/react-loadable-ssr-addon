@@ -2,6 +2,7 @@
 > Server Side Render add-on for React Loadable. Load splitted chunks was never that easy.
 
 [![NPM][npm-image]][npm-url]
+[![CircleCI][circleci-image]][circleci-url]
 [![GitHub All Releases][releases-image]][releases-url]
 [![GitHub stars][stars-image]][stars-url]
 [![Known Vulnerabilities][vulnerabilities-image]][vulnerabilities-url]
@@ -381,6 +382,8 @@ Distributed under the MIT license. [Click here](/LICENSE) for more information.
 
 <!-- Markdown link & img dfn's -->
 
+[circleci-image]:https://circleci.com/gh/themgoncalves/react-loadable-ssr-addon.svg?style=svg
+[circleci-url]: https://circleci.com/gh/themgoncalves/react-loadable-ssr-addon
 [vulnerabilities-image]: https://snyk.io/test/github/themgoncalves/react-loadable-ssr-addon/badge.svg
 [vulnerabilities-url]: https://snyk.io/test/github/themgoncalves/react-loadable-ssr-addon
 [issues-image]: https://img.shields.io/github/issues/themgoncalves/react-loadable-ssr-addon.svg
