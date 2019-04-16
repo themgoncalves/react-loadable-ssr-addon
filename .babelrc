@@ -16,5 +16,14 @@
         "react-loadable-ssr-addon": "./source/index.js"
       }
     }]
-  ]
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        ["transform-remove-console", {
+          "exclude": [ "error", "warn"]
+        }]
+      ]
+    }
+  }
 }

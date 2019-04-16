@@ -24,7 +24,7 @@
   "scripts": {
     "prepare": "npm run build",
     "start": "npm run clean:example && npm run build && webpack && babel-node example/server.js",
-    "build": "rm -rf lib && babel source -d lib",
+    "build": "NODE_ENV=production && rm -rf lib && babel source -d lib",
     "clean:example": "rm -rf ./example/dist/",
     "lint": "eslint --ext js --ext jsx source || exit 0",
     "lint:fix": "eslint --ext js --ext jsx source --fix|| exit 0",
@@ -50,6 +50,7 @@
     "babel-loader": "^8.0.2",
     "babel-plugin-dynamic-import-node": "^2.1.0",
     "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "babel-preset-minify": "^0.4.3",
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "17.1.0",
