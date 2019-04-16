@@ -341,6 +341,9 @@ containing an `array of objects` with the following format:
 <br />
 
 ## Release History
+* 0.1.7
+    * FIX: [`Cannot read property 'integrity' of undefined`](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/10) reported by [@nguyenngocphuongnb](https://github.com/nguyenngocphuongnb);
+    * Minor improvements.
 * 0.1.6
     * FIX: `getManifestOutputPath` method when requested from `Webpack Dev Middleware`;
 * 0.1.5
