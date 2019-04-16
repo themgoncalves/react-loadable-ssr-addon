@@ -40,6 +40,47 @@ export default class ReactLoadableSSRAddon {
   }
 
   /**
+   * Check if request is from Dev Server
+   * aka webpack-dev-server
+   * @method isRequestFromDevServer
+   * @returns {boolean} - True or False
+   */
+  get isRequestFromDevServer() {
+    if (process.argv.some(arg => arg.includes('webpack-dev-server'))) { return true; }
+
+    const { outputFileSystem, outputFileSystem: { constructor: { name } } } = this.compiler;
+
+    return outputFileSystem && name === 'MemoryFileSystem';
+  }
+
+  /**
+   * Get assets manifest output path
+   * @readonly
+   * @method manifestOutputPath
+   * @returns {string} - Output path containing path + filename.
+   */
+  get manifestOutputPath() {
+    if (path.isAbsolute(this.options.filename)) {
+      return this.options.filename;
+    }
+
+    const { outputPath, options: { filename, devServer } } = this.compiler;
+
+    if (this.isRequestFromDevServer && devServer) {
+      let devOutputPath = (devServer.outputPath || outputPath || '/');
+
+      if (devOutputPath === '/') {
+        console.warn('Please use an absolute path in options.output when using webpack-dev-server.');
+        devOutputPath = this.compiler.context || process.cwd();
+      }
+
+      return path.resolve(devOutputPath, filename);
+    }
+
+    return path.resolve(outputPath, filename);
+  }
+
+  /**
    * Get application assets chunks
    * @method getAssets
    * @param {array} assetsChunk - Webpack application chunks
@@ -80,17 +121,6 @@ export default class ReactLoadableSSRAddon {
   }
 
   /**
-   * Check if request is from Dev Server
-   * aka webpack-dev-server
-   * @method isRequestFromDevServer
-   * @returns {boolean} - True or False
-   */
-  get isRequestFromDevServer() {
-    if (process.argv.some(arg => arg.includes('webpack-dev-server'))) { return true; }
-    return this.compiler.outputFileSystem && this.compiler.outputFileSystem.constructor.name === 'MemoryFileSystem';
-  }
-
-  /**
    * Get application chunk origin
    * @method getChunkOrigin
    * @param {object} id  - Webpack application chunk id
@@ -116,31 +146,6 @@ export default class ReactLoadableSSRAddon {
     return Array.from(origins);
   }
   /* eslint-enabled */
-
-  /**
-   * Get assets manifest output path
-   *
-   * @method getManifestOutputPath
-   * @returns {string} - Output path containing path + filename.
-   */
-  getManifestOutputPath() {
-    if (path.isAbsolute(this.options.filename)) {
-      return this.options.filename;
-    }
-
-    if (this.isRequestFromDevServer && this.compiler.options.devServer) {
-      let outputPath = (this.compiler.options.devServer.outputPath || this.compiler.outputPath || '/');
-
-      if (outputPath === '/') {
-        console.warn('Please use an absolute path in options.output when using webpack-dev-server.'); // eslint-disable-line no-console
-        outputPath = this.compiler.context || process.cwd();
-      }
-
-      return path.resolve(outputPath, this.options.filename);
-    }
-
-    return path.resolve(this.compiler.outputPath, this.options.filename);
-  }
 
   /**
    * Webpack apply method.
@@ -201,6 +206,7 @@ export default class ReactLoadableSSRAddon {
       if (!origins[key]) { origins[key] = []; }
 
       siblings.push(id);
+
       for (let i = 0; i < siblings.length; i += 1) {
         const sibling = siblings[i];
         if (!origins[key].includes(sibling)) {
@@ -217,9 +223,11 @@ export default class ReactLoadableSSRAddon {
         if (!assets[id][ext]) { assets[id][ext] = []; }
 
         if (!isDuplicated(assets[id][ext], 'file', file)) {
-          if (currentAsset
+          const shouldComputeIntegrity = Object.keys(currentAsset)
             && this.options.integrity
-            && !currentAsset[this.options.integrityPropertyName]) {
+            && !currentAsset[this.options.integrityPropertyName];
+
+          if (shouldComputeIntegrity) {
             currentAsset[this.options.integrityPropertyName] = computeIntegrity(
               this.options.integrityAlgorithms,
               currentAsset.source(),
@@ -249,7 +257,7 @@ export default class ReactLoadableSSRAddon {
    * @method writeAssetsFile
    */
   writeAssetsFile() {
-    const filePath = this.getManifestOutputPath();
+    const filePath = this.manifestOutputPath;
     const fileDir = path.dirname(filePath);
     const json = JSON.stringify(this.manifest, null, 2);
     try {
