@@ -60,11 +60,12 @@ export default class ReactLoadableSSRAddon {
    * @returns {string} - Output path containing path + filename.
    */
   get manifestOutputPath() {
-    if (path.isAbsolute(this.options.filename)) {
-      return this.options.filename;
+    const filename = this.options.filename;
+    if (path.isAbsolute(filename)) {
+      return filename;
     }
 
-    const { outputPath, options: { filename, devServer } } = this.compiler;
+    const { outputPath, options: { devServer } } = this.compiler;
 
     if (this.isRequestFromDevServer && devServer) {
       let devOutputPath = (devServer.outputPath || outputPath || '/');
