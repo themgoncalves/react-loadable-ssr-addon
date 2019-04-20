@@ -341,7 +341,10 @@ containing an `array of objects` with the following format:
 <br />
 
 ## Release History
-* 0.1.7
+* 0.1.8
+    * Includes all features from deprecated v0.1.7;
+    * FIX: [Issue #11](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/11) reported by [@endiliey](https://github.com/endiliey)
+* ~~0.1.7 (_deprecated_)~~
     * FIX: [`Cannot read property 'integrity' of undefined`](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/10) reported by [@nguyenngocphuongnb](https://github.com/nguyenngocphuongnb);
     * Minor improvements.
 * 0.1.6
