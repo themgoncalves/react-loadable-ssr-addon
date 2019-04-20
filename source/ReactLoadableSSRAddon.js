@@ -60,7 +60,7 @@ export default class ReactLoadableSSRAddon {
    * @returns {string} - Output path containing path + filename.
    */
   get manifestOutputPath() {
-    const filename = this.options.filename;
+    const { filename } = this.options;
     if (path.isAbsolute(filename)) {
       return filename;
     }
