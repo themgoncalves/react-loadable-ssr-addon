@@ -1,13 +1,13 @@
 /**
  * react-loadable-ssr-addon
  * @author Marcos Gonçalves <contact@themgoncalves.com>
- *@version 0.1.8
+ * @version 0.1.8
  */
 
 import fs from 'fs';
 import path from 'path';
 import url from 'url';
-import { getFileExtension, computeIntegrity, isDuplicated } from './utils';
+import { getFileExtension, computeIntegrity, hasEntry } from './utils';
 
 // Webpack plugin name
 const PLUGIN_NAME = 'ReactLoadableSSRAddon';
@@ -25,7 +25,7 @@ const defaultOptions = {
  * @class ReactLoadableSSRAddon
  * @desc Generate application assets manifest with its dependencies.
  */
-export default class ReactLoadableSSRAddon {
+class ReactLoadableSSRAddon {
   /**
    * @constructs ReactLoadableSSRAddon
    * @param options
@@ -223,7 +223,7 @@ export default class ReactLoadableSSRAddon {
         if (!assets[id]) { assets[id] = {}; }
         if (!assets[id][ext]) { assets[id][ext] = []; }
 
-        if (!isDuplicated(assets[id][ext], 'file', file)) {
+        if (!hasEntry(assets[id][ext], 'file', file)) {
           const shouldComputeIntegrity = Object.keys(currentAsset)
             && this.options.integrity
             && !currentAsset[this.options.integrityPropertyName];
@@ -274,3 +274,6 @@ export default class ReactLoadableSSRAddon {
     fs.writeFileSync(filePath, json);
   }
 }
+
+export { defaultOptions };
+export default ReactLoadableSSRAddon;

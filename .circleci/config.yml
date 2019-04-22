@@ -18,8 +18,8 @@ jobs:
 
       - run: npm install
       - run:
-          name: Run linting
-          command: npm run lint
+         name: Run Tests
+         command: npm run test
 
       - save_cache:
           paths:

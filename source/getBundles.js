@@ -1,10 +1,10 @@
 /**
  * react-loadable-ssr-addon
  * @author Marcos Gonçalves <contact@themgoncalves.com>
- *@version 0.1.8
+ * @version 0.1.8
  */
 
-import unique from './utils/unique';
+import { unique } from './utils';
 
 /**
  * getBundles
@@ -14,6 +14,8 @@ import unique from './utils/unique';
  */
 /* eslint-disable no-param-reassign */
 function getBundles(manifest, chunks) {
+  if (!manifest || !chunks) { return {}; }
+
   const assetsKey = chunks.reduce((key, chunk) => {
     if (manifest.origins[chunk]) {
       key = unique([...key, ...manifest.origins[chunk]]);

@@ -1,8 +1,14 @@
-## Description
+## Summary
 A few sentences describing the overall goals of the pull request's commits.
 
 ## Why
-A few sentences describing the overall goals of the pull request's commits.
+A few sentences describing the reasons behind this pull request.
+
+## Checklist
+
+- [ ] Your code builds clean without any `errors` or `warnings`
+- [ ] You are using `approved terminology`
+- [ ] You have added `unit tests`, if apply.
 
 ## Emojis for categorizing pull requests:
 
