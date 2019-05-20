@@ -143,6 +143,9 @@ class ReactLoadableSSRAddon {
     }
 
     if (origins.size === 0) { return [names[0] || id]; }
+    if (this.entrypoints.has(names[0])) {
+      origins.add(names[0]);
+    }
 
     return Array.from(origins);
   }
