@@ -341,6 +341,8 @@ containing an `array of objects` with the following format:
 <br />
 
 ## Release History
+* 0.1.9
+    * FIX: [Missing entry in origins](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/13) reported by [@p-j](https://github.com/p-j);
 * 0.1.8
     * Includes all features from deprecated v0.1.7;
     * FIX: [Issue #11](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/11) reported by [@endiliey](https://github.com/endiliey)
@@ -351,6 +353,10 @@ containing an `array of objects` with the following format:
     * FIX: `getManifestOutputPath` method when requested from `Webpack Dev Middleware`;
 * 0.1.5
     * FIX: [Issue #7](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/7) reported by [@themgoncalves](https://github.com/themgoncalves) and [@tomkelsey](https://github.com/tomkelsey)
+
+<details>
+  <summary>See older release note</summary>
+
 * 0.1.4
     * FIX: [Issue #5](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/5) reported by [@tomkelsey](https://github.com/tomkelsey)
 * 0.1.3
@@ -365,6 +371,7 @@ containing an `array of objects` with the following format:
     * NEW: Created `ReactLoadableSSRAddon` Plugin for Webpack 3+
 * 0.0.1
     * Work in progress
+</details>
 
 <br />
 
