@@ -20,16 +20,12 @@ Oh yeah, and we also **provide support for [SRI (Subresource Integrity)](https:/
 
 ## Installation
 
-Since we have experience some issues with NPM along the time, we strongly recomment the use of [YARN Package Manage](https://yarnpkg.com/en/);
-
 **Download our NPM Package**
 
 ```sh
-yarn add react-loadable-ssr-addon
-
-# or
-
 npm install react-loadable-ssr-addon
+# or
+yarn add react-loadable-ssr-addon
 ```
 
 **Note**: `react-loadable-ssr-addon` **should not** be listed in the `devDependencies`.
