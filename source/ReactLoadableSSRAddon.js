@@ -135,8 +135,12 @@ class ReactLoadableSSRAddon {
     for (let i = 0; i < modules.length; i += 1) {
       const { reasons } = modules[i];
       for (let j = 0; j < reasons.length; j += 1) {
-        const { type, userRequest } = reasons[j];
-        if (type === 'import()') {
+        const reason = reasons[j];
+        const type = reason.dependency ? reason.dependency.type : null;
+        const userRequest = reason.dependency
+          ? reason.dependency.userRequest
+          : null;
+        if (type === "import()") {
           origins.add(userRequest);
         }
       }
@@ -170,6 +174,40 @@ class ReactLoadableSSRAddon {
     }
   }
 
+  // Equivalent of getting stats.chunks but much less in size& memory usage
+  // Try to mimic https://github.com/webpack/webpack/blob/master/lib/Stats.js#L632 code
+  // without expensive operations
+  getMinimalStatsChunks(compilationChunks) {
+    const compareId = (a, b) => {
+      if (typeof a !== typeof b) {
+        return typeof a < typeof b ? -1 : 1;
+      }
+      if (a < b) return -1;
+      if (a > b) return 1;
+      return 0;
+    };
+
+    return compilationChunks.map(chunk => {
+      const siblings = new Set();
+      if (chunk.groupsIterable) {
+        for (const chunkGroup of chunk.groupsIterable) {
+          for (const sibling of chunkGroup.chunks) {
+            if (sibling !== chunk) siblings.add(sibling.id);
+          }
+    }
+    }
+
+      return {
+        id: chunk.id,
+        names: chunk.name ? [chunk.name] : [],
+        files: chunk.files.slice(),
+        hash: chunk.renderedHash,
+        siblings: Array.from(siblings).sort(compareId),
+        modules: chunk.getModules()
+      };
+    });
+  }
+
   /**
    * Handles emit event from Webpack
    * @desc The Webpack Compiler begins with emitting the generated assets.
@@ -180,19 +218,18 @@ class ReactLoadableSSRAddon {
    * @param {function} callback
    */
   handleEmit(compilation, callback) {
-    this.stats = compilation.getStats().toJson({
+     this.stats = compilation.getStats().toJson({
       all: false,
-      chunks: true,
       entrypoints: true,
-      chunkModules: true,
-      reasons: true,
     }, true);
-    this.options.publicPath = (compilation.outputOptions
+    this.options.publicPath =
+      (compilation.outputOptions
       ? compilation.outputOptions.publicPath
       : compilation.options.output.publicPath)
       || '';
     this.getEntrypoints(this.stats.entrypoints);
-    this.getAssets(this.stats.chunks);
+
+    this.getAssets(this.getMinimalStatsChunks(compilation.chunks));
     this.processAssets(compilation.assets);
     this.writeAssetsFile();
 
