@@ -180,7 +180,13 @@ class ReactLoadableSSRAddon {
    * @param {function} callback
    */
   handleEmit(compilation, callback) {
-    this.stats = compilation.getStats().toJson();
+    this.stats = compilation.getStats().toJson({
+      all: false,
+      chunks: true,
+      entrypoints: true,
+      chunkModules: true,
+      reasons: true,
+    }, true);
     this.options.publicPath = (compilation.outputOptions
       ? compilation.outputOptions.publicPath
       : compilation.options.output.publicPath)
