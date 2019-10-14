@@ -5,7 +5,7 @@ test('returns the correct file extension', (t) => {
   const extensions = ['.jpeg', '.js', '.css', '.json', '.xml'];
   const filePath = 'source/static/images/hello-world';
 
-  extensions.forEach(ext => {
+  extensions.forEach((ext) => {
     t.true(getFileExtension(`${filePath}${ext}`) === ext);
   });
 });

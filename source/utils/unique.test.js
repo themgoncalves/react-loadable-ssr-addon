@@ -7,7 +7,7 @@ test('it filters duplicated entries', (t) => {
   const filtered = unique([...raw, ...duplicated]);
 
   duplicated.forEach((dup) => {
-    t.true(filtered.filter(item => item === dup).length === 1);
+    t.true(filtered.filter((item) => item === dup).length === 1);
   });
 });
 

@@ -337,6 +337,8 @@ containing an `array of objects` with the following format:
 <br />
 
 ## Release History
+* 0.2.0
+    * Improvement: Reduce memory consumption ([Issue #17](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/17)) reported by [@endiliey](https://github.com/endiliey)
 * 0.1.9
     * FIX: [Missing entry in origins](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/13) reported by [@p-j](https://github.com/p-j);
 * 0.1.8
@@ -417,9 +419,9 @@ Distributed under the MIT license. [Click here](/LICENSE) for more information.
 [stars-url]: https://github.com/themgoncalves/react-loadable-ssr-addon/stargazers
 [forks-image]: https://img.shields.io/github/forks/themgoncalves/react-loadable-ssr-addon.svg
 [forks-url]: https://github.com/themgoncalves/react-loadable-ssr-addon/network
-[awesome-image]: https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg
-[releases-image]: https://img.shields.io/github/downloads/atom/atom/total.svg
+[releases-image]: https://img.shields.io/npm/dm/react-loadable-ssr-addon.svg
 [releases-url]: https://github.com/themgoncalves/react-loadable-ssr-addon
+[awesome-image]: https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg
 [awesome-url]: https://github.com/themgoncalves/react-loadable-ssr-addon
 [npm-image]: https://img.shields.io/npm/v/react-loadable-ssr-addon.svg
 [npm-url]: https://www.npmjs.com/package/react-loadable-ssr-addon

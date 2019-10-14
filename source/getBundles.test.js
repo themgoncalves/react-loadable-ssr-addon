@@ -14,7 +14,7 @@ test.beforeEach(() => {
 
 test('returns the correct bundle size and content', (t) => {
   t.true(Object.keys(bundles).length === fileType.length);
-  fileType.forEach(type => !!bundles[type]);
+  fileType.forEach((type) => !!bundles[type]);
 });
 
 test('returns the correct bundle infos', (t) => {

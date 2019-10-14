@@ -1,7 +1,7 @@
 /**
  * react-loadable-ssr-addon
  * @author Marcos Gonçalves <contact@themgoncalves.com>
- * @version 0.1.9
+ * @version 0.2.0
  */
 
 import fs from 'fs';
@@ -46,7 +46,7 @@ class ReactLoadableSSRAddon {
    * @returns {boolean} - True or False
    */
   get isRequestFromDevServer() {
-    if (process.argv.some(arg => arg.includes('webpack-dev-server'))) { return true; }
+    if (process.argv.some((arg) => arg.includes('webpack-dev-server'))) { return true; }
 
     const { outputFileSystem, outputFileSystem: { constructor: { name } } } = this.compiler;
 
@@ -140,7 +140,7 @@ class ReactLoadableSSRAddon {
         const userRequest = reason.dependency
           ? reason.dependency.userRequest
           : null;
-        if (type === "import()") {
+        if (type === 'import()') {
           origins.add(userRequest);
         }
       }
@@ -174,9 +174,14 @@ class ReactLoadableSSRAddon {
     }
   }
 
-  // Equivalent of getting stats.chunks but much less in size& memory usage
-  // Try to mimic https://github.com/webpack/webpack/blob/master/lib/Stats.js#L632 code
-  // without expensive operations
+  /**
+   * Get Minimal Stats Chunks
+   * @description equivalent of getting stats.chunks but much less in size & memory usage
+   * It tries to mimic https://github.com/webpack/webpack/blob/master/lib/Stats.js#L632
+   * implementation without expensive operations
+   * @param {array} compilationChunks
+   * @returns {array}
+   */
   getMinimalStatsChunks(compilationChunks) {
     const compareId = (a, b) => {
       if (typeof a !== typeof b) {
@@ -187,15 +192,21 @@ class ReactLoadableSSRAddon {
       return 0;
     };
 
-    return compilationChunks.map(chunk => {
+    return compilationChunks.map((chunk) => {
       const siblings = new Set();
+
       if (chunk.groupsIterable) {
-        for (const chunkGroup of chunk.groupsIterable) {
-          for (const sibling of chunkGroup.chunks) {
+        const chunkGroups = Array.from(chunk.groupsIterable);
+
+        for (let i = 0; i < chunkGroups.length; i += 1) {
+          const group = Array.from(chunkGroups[i].chunks);
+
+          for (let j = 0; j < group.length; j += 1) {
+            const sibling = group[j];
             if (sibling !== chunk) siblings.add(sibling.id);
           }
-    }
-    }
+        }
+      }
 
       return {
         id: chunk.id,
@@ -203,7 +214,7 @@ class ReactLoadableSSRAddon {
         files: chunk.files.slice(),
         hash: chunk.renderedHash,
         siblings: Array.from(siblings).sort(compareId),
-        modules: chunk.getModules()
+        modules: chunk.getModules(),
       };
     });
   }
@@ -218,12 +229,11 @@ class ReactLoadableSSRAddon {
    * @param {function} callback
    */
   handleEmit(compilation, callback) {
-     this.stats = compilation.getStats().toJson({
+    this.stats = compilation.getStats().toJson({
       all: false,
       entrypoints: true,
     }, true);
-    this.options.publicPath =
-      (compilation.outputOptions
+    this.options.publicPath = (compilation.outputOptions
       ? compilation.outputOptions.publicPath
       : compilation.options.output.publicPath)
       || '';
