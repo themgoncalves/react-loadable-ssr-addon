@@ -192,7 +192,7 @@ class ReactLoadableSSRAddon {
       return 0;
     };
 
-    return compilationChunks.map((chunk) => {
+    return compilationChunks.reduce((chunks, chunk) => {
       const siblings = new Set();
 
       if (chunk.groupsIterable) {
@@ -208,15 +208,19 @@ class ReactLoadableSSRAddon {
         }
       }
 
-      return {
-        id: chunk.id,
-        names: chunk.name ? [chunk.name] : [],
-        files: chunk.files.slice(),
-        hash: chunk.renderedHash,
-        siblings: Array.from(siblings).sort(compareId),
-        modules: chunk.getModules(),
-      };
-    });
+      chunk.ids.forEach((id) => {
+        chunks.push({
+          id,
+          names: chunk.name ? [chunk.name] : [],
+          files: chunk.files.slice(),
+          hash: chunk.renderedHash,
+          siblings: Array.from(siblings).sort(compareId),
+          modules: chunk.getModules(),
+        });
+      });
+
+      return chunks;
+    }, []);
   }
 
   /**
