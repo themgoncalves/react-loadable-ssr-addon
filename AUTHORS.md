@@ -1,5 +1,6 @@
 react-loadable-ssr-addon is authored by: 
 
+* Alexey Pyltsyn <lex61rus@gmail.com>
 * Endi <endiliey@gmail.com>
 * Jérémie Parker <gitkraken@jeremie-parker.com>
 * Marcos Gonçalves <contact@themgoncalves.com>
