@@ -1,6 +1,6 @@
 {
   "name": "react-loadable-ssr-addon",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Server Side Render add-on for React Loadable. Load splitted chunks was never that easy.",
   "main": "lib/index.js",
   "repository": {
@@ -51,6 +51,7 @@
     "@babel/core": "^7.10.1",
     "@babel/node": "^7.10.1",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.10.1",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-classes": "^7.10.1",
     "@babel/plugin-transform-object-assign": "^7.10.1",
