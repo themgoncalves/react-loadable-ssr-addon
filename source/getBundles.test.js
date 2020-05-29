@@ -2,7 +2,7 @@ import test from 'ava';
 import path from 'path';
 import getBundles from './getBundles';
 import config from '../webpack.config';
-import manifest from '../example/dist/react-loadable-ssr-addon'; // eslint-disable-line import/no-unresolved
+import manifest from '../example/dist/react-loadable-ssr-addon'; // eslint-disable-line import/no-unresolved, import/extensions
 
 const modules = ['./Header', './multilevel/Multilevel', './SharedMultilevel', '../../SharedMultilevel'];
 const fileType = ['js'];
