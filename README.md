@@ -337,6 +337,8 @@ containing an `array of objects` with the following format:
 <br />
 
 ## Release History
+* 0.2.2
+    * FIX: As precaution measure, downgrade few dependencies due to node SemVer incompabitility.
 * 0.2.1
     * FIX: [Possible missing chunk](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/20) reported by [@lex111](https://github.com/lex111)
 * 0.2.0
