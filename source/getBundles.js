@@ -24,7 +24,7 @@ function getBundles(manifest, chunks) {
   }, []);
 
   return assetsKey.reduce((bundle, asset) => {
-    Object.keys(manifest.assets[asset]).forEach((key) => {
+    Object.keys(manifest.assets[asset] || {}).forEach((key) => {
       const content = manifest.assets[asset][key];
       if (!bundle[key]) { bundle[key] = []; }
       bundle[key] = unique([...bundle[key], ...content]);
