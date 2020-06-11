@@ -1,6 +1,7 @@
 import test from 'ava';
 import path from 'path';
 import fs from 'fs';
+import waitForExpect from 'wait-for-expect';
 import webpack from 'webpack';
 import config from '../webpack.config';
 import ReactLoadableSSRAddon, { defaultOptions } from './ReactLoadableSSRAddon';
@@ -65,12 +66,14 @@ test.cb('outputs with integrity', (t) => {
     }),
   ];
 
-  runWebpack(config, t.end, () => {
+  runWebpack(config, t.end, async () => {
     const manifest = require(`${manifestOutputPath}`);
 
-    Object.keys(manifest.assets).forEach((asset) => {
-      manifest.assets[asset].js.forEach(({ integrity }) => {
-        t.false(!integrity);
+    await waitForExpect(() => {
+      Object.keys(manifest.assets).forEach((asset) => {
+        manifest.assets[asset].js.forEach(({ integrity }) => {
+          t.truthy(integrity);
+        });
       });
     });
   });
