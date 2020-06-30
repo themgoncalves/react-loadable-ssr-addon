@@ -59,19 +59,19 @@
     "@babel/preset-env": "^7.10.1",
     "@babel/preset-react": "^7.10.1",
     "@babel/register": "^7.10.1",
-    "ava": "^2.4.0",
+    "ava": "^3.9.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "babel-preset-minify": "^0.5.1",
-    "eslint": "^6.5.1",
+    "eslint": "^7.3.1",
     "eslint-config-airbnb": "18.1.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.2",
     "express": "^4.17.1",
-    "husky": "^3.0.9",
+    "husky": "^4.2.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-loadable": "^5.5.0",
@@ -92,5 +92,8 @@
       "@babel/register"
     ],
     "concurrency": 5
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.10.3"
   }
 }
