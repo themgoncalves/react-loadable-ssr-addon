@@ -12,6 +12,9 @@ import { getFileExtension, computeIntegrity, hasEntry } from './utils';
 // Webpack plugin name
 const PLUGIN_NAME = 'ReactLoadableSSRAddon';
 
+const WEBPACK_VERSION = require('webpack/package.json').version;
+const WEBPACK_5 = WEBPACK_VERSION.startsWith('5.');
+
 // Default plugin options
 const defaultOptions = {
   filename: 'assets-manifest.json',
@@ -132,16 +135,21 @@ class ReactLoadableSSRAddon {
   /* eslint-disable class-methods-use-this */
   getChunkOrigin({ id, names, modules }) {
     const origins = new Set();
-    for (let i = 0; i < modules.length; i += 1) {
-      const { reasons } = modules[i];
-      for (let j = 0; j < reasons.length; j += 1) {
-        const reason = reasons[j];
-        const type = reason.dependency ? reason.dependency.type : null;
-        const userRequest = reason.dependency
-          ? reason.dependency.userRequest
-          : null;
-        if (type === 'import()') {
-          origins.add(userRequest);
+    if (!WEBPACK_5) {
+      // webpack 5 doesn't have 'reasons' on chunks any more
+      // this is a dirty solution to make it work without throwing
+      // an error, but does need tweaking to make everything work properly.
+      for (let i = 0; i < modules.length; i += 1) {
+        const { reasons } = modules[i];
+        for (let j = 0; j < reasons.length; j += 1) {
+          const reason = reasons[j];
+          const type = reason.dependency ? reason.dependency.type : null;
+          const userRequest = reason.dependency
+            ? reason.dependency.userRequest
+            : null;
+          if (type === 'import()') {
+            origins.add(userRequest);
+          }
         }
       }
     }
@@ -164,14 +172,8 @@ class ReactLoadableSSRAddon {
    */
   apply(compiler) {
     this.compiler = compiler;
-    // check if webpack 4 `hooks` exists
-    // otherwise, will fallback to the old syntax
     // @See {@Link https://webpack.js.org/api/compiler-hooks/}
-    if (compiler.hooks) {
-      compiler.hooks.emit.tapAsync(PLUGIN_NAME, this.handleEmit.bind(this));
-    } else {
-      compiler.plugin('emit', this.handleEmit.bind(this));
-    }
+    compiler.hooks.emit.tapAsync(PLUGIN_NAME, this.handleEmit.bind(this));
   }
 
   /**
