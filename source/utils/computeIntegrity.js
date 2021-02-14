@@ -1,7 +1,7 @@
 /**
  * react-loadable-ssr-addon
  * @author Marcos Gonçalves <contact@themgoncalves.com>
- * @version 0.3.0
+ * @version 1.0.0
  */
 
 import crypto from 'crypto';

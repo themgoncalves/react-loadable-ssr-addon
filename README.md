@@ -337,8 +337,11 @@ containing an `array of objects` with the following format:
 <br />
 
 ## Release History
+* 1.0.0
+    * BREAKING CHANGE: drop support for Webpack v3.
+    * NEW: add [support for Webpack v5](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/260)
 * 0.3.0
-    * NEW: [`@babel/runtime` become a explicit dependency](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/22) by [@RDIL](https://github.com/RDIL)
+    * NEW: [`@babel/runtime` become an explicit dependency](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/22) by [@RDIL](https://github.com/RDIL)
         > Requirement for `yarn v2`.
 * 0.2.3
     * FIX: [Parsing `null` or `undefined` to object on `getBundles()`](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/21) reported by [@slorber](https://github.com/slorber)
@@ -403,7 +406,7 @@ Distributed under the MIT license. [Click here](/LICENSE) for more information.
 ### Emojis for categorizing commits:
 
 ⚡️ New feature (`:zap:`)  
-🐛 Bug fix (`:bug:`)    
+🐛 Bug fix (`:bug:`)  
 🔥 P0 fix (`:fire:`)  
 ✅ Tests (`:white_check_mark:`)  
 🚀 Performance improvements (`:rocket:`)  
