@@ -13,6 +13,7 @@ import { getFileExtension, computeIntegrity, hasEntry } from './utils';
 const PLUGIN_NAME = 'ReactLoadableSSRAddon';
 
 const WEBPACK_VERSION = require('webpack/package.json').version;
+
 const WEBPACK_5 = WEBPACK_VERSION.startsWith('5.');
 
 // Default plugin options
@@ -194,7 +195,9 @@ class ReactLoadableSSRAddon {
       return 0;
     };
 
-    return (WEBPACK_5 ? Array.from(compilationChunks) : compilationChunks).reduce((chunks, chunk) => {
+    return (WEBPACK_5 ?
+      Array.from(compilationChunks) : compilationChunks
+    ).reduce((chunks, chunk) => {
       const siblings = new Set();
 
       if (chunk.groupsIterable) {
