@@ -6,11 +6,12 @@ const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || '8080';
 
 module.exports = {
+  mode: 'production',
   target: 'web',
   entry: {
     index: './example/client.jsx',
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-cheap-module-source-map',
   output: {
     publicPath: '/dist/',
     path: path.join(__dirname, 'example', 'dist'),
@@ -52,4 +53,5 @@ module.exports = {
       filename: 'react-loadable-ssr-addon.json',
     }),
   ],
+  performance: false,
 };
