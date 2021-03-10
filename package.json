@@ -44,7 +44,7 @@
   },
   "peerDependencies": {
     "react-loadable": "*",
-    "webpack": ">=4.41.1"
+    "webpack": ">=4.41.1 || 5.x"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",

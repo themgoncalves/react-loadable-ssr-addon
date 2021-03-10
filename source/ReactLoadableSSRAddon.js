@@ -194,7 +194,7 @@ class ReactLoadableSSRAddon {
       return 0;
     };
 
-    return compilationChunks.reduce((chunks, chunk) => {
+    return (WEBPACK_5 ? Array.from(compilationChunks) : compilationChunks).reduce((chunks, chunk) => {
       const siblings = new Set();
 
       if (chunk.groupsIterable) {
@@ -214,9 +214,10 @@ class ReactLoadableSSRAddon {
         chunks.push({
           id,
           names: chunk.name ? [chunk.name] : [],
-          files: chunk.files.slice(),
+          files: (WEBPACK_5 ? Array.from(chunk.files) : chunk.files).slice(),
           hash: chunk.renderedHash,
           siblings: Array.from(siblings).sort(compareId),
+          // TODO: This is the final deprecation warning needing to be solved.
           modules: chunk.getModules(),
         });
       });

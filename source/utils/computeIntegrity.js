@@ -9,7 +9,7 @@ import crypto from 'crypto';
 /**
  * Compute SRI Integrity
  * @func computeIntegrity
- * See {@link https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity|Subresource Integrity} at MDN
+ * See {@link https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity Subresource Integrity} at MDN
  * @param  {array} algorithms - The algorithms you want to use when hashing `content`
  * @param  {string} source - File contents you want to hash
  * @return {string} SRI hash
