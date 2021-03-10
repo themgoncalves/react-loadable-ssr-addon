@@ -195,8 +195,8 @@ class ReactLoadableSSRAddon {
       return 0;
     };
 
-    return (WEBPACK_5 ?
-      Array.from(compilationChunks) : compilationChunks
+    return (
+      WEBPACK_5 ? Array.from(compilationChunks) : compilationChunks
     ).reduce((chunks, chunk) => {
       const siblings = new Set();
 
