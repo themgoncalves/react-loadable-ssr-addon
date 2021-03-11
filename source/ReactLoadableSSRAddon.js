@@ -169,7 +169,7 @@ class ReactLoadableSSRAddon {
    * @method apply
    * @param {object} compiler - Webpack compiler object
    * It represents the fully configured Webpack environment.
-   * @See {@link https://github.com/webpack/docs/wiki/how-to-write-a-plugin#compiler-and-compilation}
+   * @See {@link https://webpack.js.org/concepts/plugins/#anatomy}
    */
   apply(compiler) {
     this.compiler = compiler;
@@ -180,7 +180,7 @@ class ReactLoadableSSRAddon {
   /**
    * Get Minimal Stats Chunks
    * @description equivalent of getting stats.chunks but much less in size & memory usage
-   * It tries to mimic https://github.com/webpack/webpack/blob/master/lib/Stats.js#L632
+   * It tries to mimic https://github.com/webpack/webpack/blob/webpack-4/lib/Stats.js#L632
    * implementation without expensive operations
    * @param {array} compilationChunks
    * @returns {array}
@@ -195,9 +195,7 @@ class ReactLoadableSSRAddon {
       return 0;
     };
 
-    return (
-      WEBPACK_5 ? Array.from(compilationChunks) : compilationChunks
-    ).reduce((chunks, chunk) => {
+    return this.ensureArray(compilationChunks).reduce((chunks, chunk) => {
       const siblings = new Set();
 
       if (chunk.groupsIterable) {
@@ -217,7 +215,7 @@ class ReactLoadableSSRAddon {
         chunks.push({
           id,
           names: chunk.name ? [chunk.name] : [],
-          files: (WEBPACK_5 ? Array.from(chunk.files) : chunk.files).slice(),
+          files: this.ensureArray(chunk.files).slice(),
           hash: chunk.renderedHash,
           siblings: Array.from(siblings).sort(compareId),
           // TODO: This is the final deprecation warning needing to be solved.
@@ -338,6 +336,20 @@ class ReactLoadableSSRAddon {
     }
 
     fs.writeFileSync(filePath, json);
+  }
+
+  /**
+   * Ensure that given source is an array (webpack 5 switches a lot of Arrays to Sets)
+   * @method ensureArray
+   * @function
+   * @param {*[]|Set<any>} source
+   * @returns {*[]}
+   */
+  ensureArray(source) {
+    if (WEBPACK_5) {
+      return Array.from(source);
+    }
+    return source;
   }
 }
 
