@@ -337,9 +337,13 @@ containing an `array of objects` with the following format:
 <br />
 
 ## Release History
+* 1.0.1
+    * FIX: [Webpack v5 deprecation warning](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/27)
 * 1.0.0
     * BREAKING CHANGE: drop support for Webpack v3.
-    * NEW: add [support for Webpack v5](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/260)
+    * NEW: add [support for Webpack v5](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/26)
+<details>
+  <summary>See older release note</summary>
 * 0.3.0
     * NEW: [`@babel/runtime` become an explicit dependency](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/22) by [@RDIL](https://github.com/RDIL)
         > Requirement for `yarn v2`.
@@ -351,10 +355,6 @@ containing an `array of objects` with the following format:
     * FIX: [Possible missing chunk](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/20) reported by [@lex111](https://github.com/lex111)
 * 0.2.0
     * Improvement: Reduce memory consumption ([Issue #17](https://github.com/themgoncalves/react-loadable-ssr-addon/issues/17)) reported by [@endiliey](https://github.com/endiliey)
-
-<details>
-  <summary>See older release note</summary>
-
 * 0.1.9
     * FIX: [Missing entry in origins](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/13) reported by [@p-j](https://github.com/p-j);
 * 0.1.8
@@ -405,18 +405,18 @@ Distributed under the MIT license. [Click here](/LICENSE) for more information.
 
 ### Emojis for categorizing commits:
 
-⚡️ New feature (`:zap:`)  
-🐛 Bug fix (`:bug:`)  
-🔥 P0 fix (`:fire:`)  
-✅ Tests (`:white_check_mark:`)  
-🚀 Performance improvements (`:rocket:`)  
-🖍 CSS / Styling (`:crayon:`)  
-♿ Accessibility (`:wheelchair:`)  
-🌐 Internationalization (`:globe_with_meridians:`)  
-📖 Documentation (`:book:`)  
-🏗 Infrastructure / Tooling / Builds / CI (`:building_construction:`)  
-⏪ Reverting a previous change (`:rewind:`)  
-♻️ Refactoring (like moving around code w/o any changes) (`:recycle:`)  
+⚡️ New feature (`:zap:`)
+🐛 Bug fix (`:bug:`)
+🔥 P0 fix (`:fire:`)
+✅ Tests (`:white_check_mark:`)
+🚀 Performance improvements (`:rocket:`)
+🖍 CSS / Styling (`:crayon:`)
+♿ Accessibility (`:wheelchair:`)
+🌐 Internationalization (`:globe_with_meridians:`)
+📖 Documentation (`:book:`)
+🏗 Infrastructure / Tooling / Builds / CI (`:building_construction:`)
+⏪ Reverting a previous change (`:rewind:`)
+♻️ Refactoring (like moving around code w/o any changes) (`:recycle:`)
 🚮 Deleting code (`:put_litter_in_its_place:`)
 
 <!-- Markdown link & img dfn's -->
