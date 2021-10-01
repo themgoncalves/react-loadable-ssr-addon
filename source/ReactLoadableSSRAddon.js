@@ -12,10 +12,6 @@ import { getFileExtension, computeIntegrity, hasEntry } from './utils';
 // Webpack plugin name
 const PLUGIN_NAME = 'ReactLoadableSSRAddon';
 
-const WEBPACK_VERSION = require('webpack/package.json').version;
-
-const WEBPACK_5 = WEBPACK_VERSION.startsWith('5.');
-
 // Default plugin options
 const defaultOptions = {
   filename: 'assets-manifest.json',
@@ -41,6 +37,7 @@ class ReactLoadableSSRAddon {
     this.entrypoints = new Set();
     this.assetsByName = new Map();
     this.manifest = {};
+    this.isWebpack5 = require('webpack/package.json').version.startsWith('5.');
   }
 
   /**
@@ -136,7 +133,7 @@ class ReactLoadableSSRAddon {
   /* eslint-disable class-methods-use-this */
   getChunkOrigin({ id, names, modules }) {
     const origins = new Set();
-    if (!WEBPACK_5) {
+    if (!this.isWebpack5) {
       // webpack 5 doesn't have 'reasons' on chunks any more
       // this is a dirty solution to make it work without throwing
       // an error, but does need tweaking to make everything work properly.
@@ -346,7 +343,7 @@ class ReactLoadableSSRAddon {
    * @returns {*[]}
    */
   ensureArray(source) {
-    if (WEBPACK_5) {
+    if (this.isWebpack5) {
       return Array.from(source);
     }
     return source;
