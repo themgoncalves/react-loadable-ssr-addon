@@ -14,6 +14,7 @@ const PLUGIN_NAME = 'ReactLoadableSSRAddon';
 
 const WEBPACK_VERSION = (function GetVersion() {
   try {
+    // eslint-disable-next-line global-require
     return require('webpack/package.json').version;
   } catch (err) {
     return '';

@@ -10,7 +10,6 @@ test('returns the correct file extension', (t) => {
   });
 });
 
-
 test('sanitize file hash', (t) => {
   const hashes = ['?', '#'];
   const filePath = 'source/static/images/hello-world.jpeg';
@@ -25,7 +24,6 @@ test('returns empty string when there is no file extension', (t) => {
 
   t.true(getFileExtension(filePath) === '');
 });
-
 
 test('should work even with null/undefined arg', (t) => {
   const filePaths = ['', null, undefined];

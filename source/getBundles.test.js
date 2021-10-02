@@ -29,13 +29,11 @@ test('returns the correct bundle infos', (t) => {
   });
 });
 
-
 test('returns nothing when there is no match', (t) => {
   bundles = getBundles(manifest, ['foo-bar', 'foo', null, undefined]);
 
   t.true(Object.keys(bundles).length === 0);
 });
-
 
 test('should work even with null/undefined manifest or modules', (t) => {
   bundles = getBundles(manifest, null);
