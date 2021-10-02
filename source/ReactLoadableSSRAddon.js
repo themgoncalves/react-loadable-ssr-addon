@@ -15,7 +15,7 @@ const PLUGIN_NAME = 'ReactLoadableSSRAddon';
 const WEBPACK_VERSION = (function GetVersion() {
   try {
     return require('webpack/package.json').version;
-  } catch {
+  } catch (err) {
     return '';
   }
 }());
