@@ -327,7 +327,7 @@ class ReactLoadableSSRAddon {
     const json = JSON.stringify(this.manifest, null, 2);
     try {
       if (!fs.existsSync(fileDir)) {
-        fs.mkdirSync(fileDir);
+        fs.mkdirSync(fileDir, { recursive: true });
       }
     } catch (err) {
       if (err.code !== 'EEXIST') {
