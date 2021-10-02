@@ -12,7 +12,13 @@ import { getFileExtension, computeIntegrity, hasEntry } from './utils';
 // Webpack plugin name
 const PLUGIN_NAME = 'ReactLoadableSSRAddon';
 
-const WEBPACK_VERSION = require('webpack/package.json').version;
+const WEBPACK_VERSION = (function GetVersion() {
+  try {
+    return require('webpack/package.json').version;
+  } catch {
+    return '';
+  }
+}());
 
 const WEBPACK_5 = WEBPACK_VERSION.startsWith('5.');
 
