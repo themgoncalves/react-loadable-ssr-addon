@@ -337,6 +337,9 @@ containing an `array of objects` with the following format:
 <br />
 
 ## Release History
+* 1.0.2
+  * FIX: [Fix support for nested `output.path`](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/30)
+  * FIX: [Fix support for common js module](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/31)
 * 1.0.1
     * FIX: [Webpack v5 deprecation warning](https://github.com/themgoncalves/react-loadable-ssr-addon/pull/27)
 * 1.0.0
