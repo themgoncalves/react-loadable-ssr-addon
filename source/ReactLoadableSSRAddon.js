@@ -190,9 +190,10 @@ class ReactLoadableSSRAddon {
    * It tries to mimic https://github.com/webpack/webpack/blob/webpack-4/lib/Stats.js#L632
    * implementation without expensive operations
    * @param {array} compilationChunks
+   * @param {array} chunkGraph
    * @returns {array}
    */
-  getMinimalStatsChunks(compilationChunks) {
+  getMinimalStatsChunks(compilationChunks, chunkGraph) {
     const compareId = (a, b) => {
       if (typeof a !== typeof b) {
         return typeof a < typeof b ? -1 : 1;
@@ -225,8 +226,9 @@ class ReactLoadableSSRAddon {
           files: this.ensureArray(chunk.files).slice(),
           hash: chunk.renderedHash,
           siblings: Array.from(siblings).sort(compareId),
-          // TODO: This is the final deprecation warning needing to be solved.
-          modules: chunk.getModules(),
+          // Webpack5 emit deprecation warning for chunk.getModules()
+          // "DEP_WEBPACK_CHUNK_GET_MODULES"
+          modules: WEBPACK_5 ? chunkGraph.getChunkModules(chunk) : chunk.getModules(),
         });
       });
 
@@ -254,7 +256,7 @@ class ReactLoadableSSRAddon {
       || '';
     this.getEntrypoints(this.stats.entrypoints);
 
-    this.getAssets(this.getMinimalStatsChunks(compilation.chunks));
+    this.getAssets(this.getMinimalStatsChunks(compilation.chunks, compilation.chunkGraph));
     this.processAssets(compilation.assets);
     this.writeAssetsFile();
 
